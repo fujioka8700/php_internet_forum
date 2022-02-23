@@ -10,7 +10,7 @@ session_start();
   <body>
       <?php
       // デバッグ
-      print_r($_SESSION);
+    //   print_r($_SESSION);
       ?>
       <h1>会員登録完了</h1>
       <a href="./registration.php">戻る</a>
