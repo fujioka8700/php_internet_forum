@@ -1,0 +1,29 @@
+{
+  "name": "php_internet_forum",
+  "version": "1.0.0",
+  "description": "PHPで作った掲示板です",
+  "main": "index.js",
+  "scripts": {
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "production": "mix --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fujioka8700/php_internet_forum.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fujioka8700/php_internet_forum/issues"
+  },
+  "homepage": "https://github.com/fujioka8700/php_internet_forum#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "laravel-mix": "^6.0.43"
+  }
+}
