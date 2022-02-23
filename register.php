@@ -9,6 +9,5 @@ $statement = $pdo->prepare("INSERT INTO members (email, password) VALUES (:email
 $statement->execute(array('email' => $email, 'password' => $password));
 
 unset($pdo);
-unset($_SESSION['join']);
 
 header('Location: ./completed.php');

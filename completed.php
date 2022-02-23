@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+unset($_SESSION['join']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,6 +15,8 @@ session_start();
     //   print_r($_SESSION);
       ?>
       <h1>会員登録完了</h1>
-      <a href="./registration.php">戻る</a>
+      <p>*** さん</p>
+      <p>無事に会員登録が完了しました。</p>
+      <a href="./registration.php">TOPへ戻る</a>
   </body>
 </html>
