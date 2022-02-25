@@ -21,11 +21,11 @@ unset($_SESSION['join']);
   <body>
       <?php
       // デバッグ
-    //   print_r($_SESSION);
+      // print_r($_SESSION);
       ?>
       <h1>会員登録完了</h1>
       <p><?php echo $member['name']; ?> さん</p>
       <p>無事に会員登録が完了しました。</p>
-      <a href="./index.php">TOPへ戻る</a>
+      <p><a href="./index.php">TOPへ戻る</a></p>
   </body>
 </html>
