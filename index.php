@@ -7,15 +7,15 @@ if (isset($_SESSION['id'])) {
     session_destroy();
 }
 
-if (!empty($_GET)) {
-    if (($_GET['email'] != '') && ($_GET['password'] != '')) {
-        $email = $_GET['email'];
+if (!empty($_POST)) {
+    if (($_POST['email'] != '') && ($_POST['password'] != '')) {
+        $email = $_POST['email'];
         $statement = $pdo->prepare('SELECT * FROM members WHERE email=:email');
         $statement->bindValue(':email', $email, PDO::PARAM_STR);
         $statement->execute();
         $member = $statement->fetch(PDO::FETCH_ASSOC);
     
-        if ($_GET['password'] == $member['password']) {
+        if ($_POST['password'] == $member['password']) {
             $_SESSION['id'] = $member['id'];
             $_SESSION['time'] = time();
             header('Location: ./forum.php');
@@ -47,7 +47,7 @@ if (!empty($_GET)) {
       <?php elseif ($error['login'] == 'failed'): ?>
         <p>メールとパスワードが間違っています。</p>
       <?php endif ?>
-      <form action="./index.php" method="get">
+      <form action="./index.php" method="post">
           <p>email<input type="email" name="email" id=""></p>
           <p>パスワード<input type="password" name="password" id=""></p>
           <input type="submit" value="ログインする">
