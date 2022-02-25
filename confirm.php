@@ -1,12 +1,11 @@
 <?php
 session_start();
+include_once('./member_property.php');
 
 if (!isset($_SESSION['join'])) {
   header('Location: ./registration.php');
 }
 
-$email = htmlspecialchars($_SESSION['join']['email']);
-$password = htmlspecialchars($_SESSION['join']['password']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +18,7 @@ $password = htmlspecialchars($_SESSION['join']['password']);
       // デバッグ
       ?>
       <h1>会員情報確認画面</h1>
+      <p>name: <?php echo $name; ?></p>
       <p>email: <?php echo $email; ?></p>
       <p>パスワード: [セキュリティのため非表示]</p>
       <input type="button" onclick="location.href='./registration.php'" value="修正する">
