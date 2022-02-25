@@ -37,9 +37,9 @@ if (!empty($_GET)) {
   <body>
       <?php
       // デバッグ
-    //   print_r($member);
-    print_r($_COOKIE);
-    print_r($_SESSION);
+      // print_r($member);
+      // print_r($_COOKIE);
+      // print_r($_SESSION);
       ?>
       <h1>犬・猫 どちら派掲示板</h1>
       <?php if ($error['login'] == 'blank'): ?>
@@ -52,5 +52,6 @@ if (!empty($_GET)) {
           <p>パスワード<input type="password" name="password" id="" value="a"></p>
           <input type="submit" value="ログインする">
       </form>
+      <p>会員登録は<a href="./registration.php">こちら</a></p>
   </body>
 </html>

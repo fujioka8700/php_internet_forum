@@ -13,7 +13,7 @@ function email_exists($pdo, $email) {
     }
 }
 
-function is_empty($s) {
+function is_empty_member($s) {
     if ($_GET[$s] == "") {
         return 'blank';
     }
@@ -28,13 +28,15 @@ function is_no_error($error) {
 }
 
 if (!empty($_GET)) {
-    $error['email'] = is_empty('email');
+    $error['name'] = is_empty_member('name');
+
+    $error['email'] = is_empty_member('email');
 
     if ($error['email'] != 'blank') {
         $error['email'] = email_exists($pdo, $_GET['email']);
     }
 
-    $error['password'] = is_empty('password');
+    $error['password'] = is_empty_member('password');
 
     is_no_error($error);
 }
@@ -49,10 +51,15 @@ if (!empty($_GET)) {
   <body>
       <?php
       // デバッグ
-    //   echo $error['email'];
+      // echo $error['email'];
       ?>
       <h1>会員登録画面</h1>
+      <p><a href="./index.php">TOPへ戻る</a></p>
       <form action="./registration.php" method="get">
+          <?php if($error['name'] == "blank"): ?>
+            <p>名前を入力してください。</p>
+          <?php endif; ?>
+          <p>名前<input type="text" name="name" id=""></p>
           <?php if($error['email'] == "blank"): ?>
             <p>emailを入力してください。</p>
           <?php elseif($error['email'] == "duplicate"): ?>

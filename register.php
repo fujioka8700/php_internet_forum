@@ -1,12 +1,10 @@
 <?php
 session_start();
 include_once('./dbconnect.php');
+include_once('./member_property.php');
 
-$email = htmlspecialchars($_SESSION['join']['email']);
-$password = htmlspecialchars($_SESSION['join']['password']);
-
-$statement = $pdo->prepare("INSERT INTO members (email, password) VALUES (:email, :password)");
-$statement->execute(array('email' => $email, 'password' => $password));
+$statement = $pdo->prepare("INSERT INTO members (name, email, password) VALUES (:name, :email, :password)");
+$statement->execute(array('name' => $name,'email' => $email, 'password' => $password));
 
 unset($pdo);
 
