@@ -14,7 +14,7 @@ function email_exists($pdo, $email) {
 }
 
 function is_empty_member($s) {
-    if ($_GET[$s] == "") {
+    if ($_POST[$s] == "") {
         return 'blank';
     }
 }
@@ -22,18 +22,18 @@ function is_empty_member($s) {
 function is_no_error($error) {
     $judge = array_filter($error);
     if (empty($judge)) {
-        $_SESSION['join'] = $_GET;
+        $_SESSION['join'] = $_POST;
         header('Location: ./confirm.php'); 
     }
 }
 
-if (!empty($_GET)) {
+if (!empty($_POST)) {
     $error['name'] = is_empty_member('name');
 
     $error['email'] = is_empty_member('email');
 
     if ($error['email'] != 'blank') {
-        $error['email'] = email_exists($pdo, $_GET['email']);
+        $error['email'] = email_exists($pdo, $_POST['email']);
     }
 
     $error['password'] = is_empty_member('password');
@@ -46,6 +46,7 @@ if (!empty($_GET)) {
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico">
     <title>会員登録画面</title>
   </head>
   <body>
@@ -55,7 +56,7 @@ if (!empty($_GET)) {
       ?>
       <h1>会員登録画面</h1>
       <p><a href="./index.php">TOPへ戻る</a></p>
-      <form action="./registration.php" method="get">
+      <form action="./registration.php" method="post">
           <?php if($error['name'] == "blank"): ?>
             <p>名前を入力してください。</p>
           <?php endif; ?>
