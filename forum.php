@@ -14,10 +14,10 @@ if (isset($_SESSION['id'])) {
 }
 
 // 投稿内容の書き込み（CSRF対策）
-if (!empty($_GET['message'])) {
-  if (isset($_GET['token']) && $_GET['token'] === $_SESSION['token']) {
+if (!empty($_POST['message'])) {
+  if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
     $message = $pdo->prepare('INSERT INTO posts (message, created_by, created) VALUES (:message, :created_by, NOW())');
-    $message->execute(array(':message' => $_GET['message'], ':created_by' => $member['id']));
+    $message->execute(array(':message' => $_POST['message'], ':created_by' => $member['id']));
     header('Location: ./forum.php');
   } else {
     $error['login'] = 'token';
@@ -25,7 +25,7 @@ if (!empty($_GET['message'])) {
 }
 
 // 全ての投稿内容を取得
-$posts = $pdo->query('SELECT members.name, posts.message, posts.created FROM members, posts WHERE members.id = posts.created_by ORDER BY created DESC');
+$posts = $pdo->query('SELECT * FROM members, posts WHERE members.id = posts.created_by ORDER BY created DESC');
 
 // CSRF対策
 $TOKEN_LENGTH = 16;
@@ -45,7 +45,7 @@ unset($pdo);
   <body>
       <?php
       // デバッグ
-      // echo bin2hex($tokenByte);
+      // print_r($_SESSION);
       ?>
       <h1>犬・猫 どちら派掲示板</h1>
       <p><a href="index.php">ログアウト</a></p>
@@ -53,7 +53,7 @@ unset($pdo);
           <p>不正アクセスです</p>
       <?php endif; ?>
       <p><?php echo $member['name']; ?> さん、ようこそ</p>
-      <form action="./forum.php" method="get">
+      <form action="./forum.php" method="post">
           <input type="hidden" name="token" value="<?=$token?>">
           <textarea name="message" id="" cols="30" rows="10"></textarea><br>
           <input type="submit" value="投稿する">
@@ -61,6 +61,9 @@ unset($pdo);
       <?php foreach($posts as $post): ?>
         <div class="message">
           <?php echo $post['message']; ?> | <?php echo $post['name']; ?> | <?php echo $post['created']; ?>
+          <?php if ($_SESSION['id'] == $post['created_by']): ?>
+          <a href="delete.php?id=<?php echo htmlspecialchars($post['id']); ?>">削除</a>
+          <?php endif; ?>
         </div>
       <?php endforeach; ?>
   </body>

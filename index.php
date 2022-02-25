@@ -48,8 +48,8 @@ if (!empty($_GET)) {
         <p>メールとパスワードが間違っています。</p>
       <?php endif ?>
       <form action="./index.php" method="get">
-          <p>email<input type="email" name="email" id="" value="a@a.com"></p>
-          <p>パスワード<input type="password" name="password" id="" value="a"></p>
+          <p>email<input type="email" name="email" id=""></p>
+          <p>パスワード<input type="password" name="password" id=""></p>
           <input type="submit" value="ログインする">
       </form>
       <p>会員登録は<a href="./registration.php">こちら</a></p>
