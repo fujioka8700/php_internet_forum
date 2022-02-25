@@ -16,6 +16,7 @@ unset($_SESSION['join']);
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico">
     <title>会員登録完了</title>
   </head>
   <body>

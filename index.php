@@ -32,6 +32,7 @@ if (!empty($_POST)) {
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico">
     <title>犬・猫 どちら派掲示板</title>
   </head>
   <body>

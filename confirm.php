@@ -11,6 +11,7 @@ if (!isset($_SESSION['join'])) {
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico">
     <title>会員情報確認画面</title>
   </head>
   <body>

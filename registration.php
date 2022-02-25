@@ -46,6 +46,7 @@ if (!empty($_POST)) {
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico">
     <title>会員登録画面</title>
   </head>
   <body>
