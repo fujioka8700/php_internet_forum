@@ -71,6 +71,7 @@ if (!empty($_POST)) {
             <p>パスワードを入力してください。</p>
           <?php endif; ?>
           <p>パスワード<input type="password" name="password" id=""></p>
+          <p>パスワード再入力<input type="password" name="password" id=""></p>
           <input type="submit" value="登録">
       </form>
   </body>
