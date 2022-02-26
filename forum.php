@@ -25,7 +25,7 @@ if (!empty($_POST['message'])) {
 }
 
 // 全ての投稿内容を取得
-$posts = $pdo->query('SELECT * FROM members, posts WHERE members.id = posts.created_by ORDER BY created DESC');
+$posts = $pdo->query('SELECT m.animal, p.message, m.name, p.created, p.created_by, p.id FROM members AS m, posts AS p WHERE m.id = p.created_by ORDER BY p.created DESC');
 
 // CSRF対策
 $TOKEN_LENGTH = 16;
@@ -61,7 +61,7 @@ unset($pdo);
       </form>
       <?php foreach($posts as $post): ?>
         <div class="message">
-          <?php echo $post['message']; ?> | <?php echo $post['name']; ?> | <?php echo $post['created']; ?>
+        <?php echo $post['animal']; ?> | <?php echo $post['message']; ?> | <?php echo $post['name']; ?> | <?php echo $post['created']; ?>
           <?php if ($_SESSION['id'] == $post['created_by']): ?>
           <a href="delete.php?id=<?php echo htmlspecialchars($post['id']); ?>">削除</a>
           <?php endif; ?>
