@@ -2,6 +2,7 @@
 session_start();
 include_once('./dbconnect.php');
 
+// すでに登録したEmailではないか
 function email_exists($pdo, $email) {
     $statement = $pdo->prepare('SELECT COUNT(id) FROM members WHERE email=:email');
     $statement->bindValue(':email', $email, PDO::PARAM_STR);
@@ -13,12 +14,14 @@ function email_exists($pdo, $email) {
     }
 }
 
+// 入力が空ではないか確認
 function is_empty_member($s) {
     if ($_POST[$s] == "") {
         return 'blank';
     }
 }
 
+// 入力にエラーがなければ確認画面へ
 function is_no_error($error) {
     $judge = array_filter($error);
     if (empty($judge)) {
@@ -27,9 +30,12 @@ function is_no_error($error) {
     }
 }
 
+// 入力やり直し時、NameとEmailはそのまま
 function keep_your_input($s) {
   if (!empty($_POST[$s])) {
     $_SESSION[$s] = htmlspecialchars($_POST[$s]);
+  } else {
+    unset($_SESSION[$s]);
   }
 }
 
@@ -50,7 +56,7 @@ if (!empty($_POST)) {
 
     $error['password2'] = is_empty_member('password2');
 
-    // パスワードの確認
+    // ２つのパスワードの確認
     if (($_POST['password'] != $_POST['password2']) && ($_POST['password2'] != "")) {
       $error['password2'] = 'difference';
     }
@@ -78,6 +84,13 @@ if (!empty($_POST)) {
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" action="./registration.php" method="post">
                             <h3 class="text-center text-info">会員登録</h3>
+                            <div class="form-group">
+                              <p class="text-info">どちら派ですか？</p>
+                              <input type="radio" name="animal" id="dog" value="dog" checked>
+                              <label for="dog">犬</label>
+                              <input type="radio" name="animal" id="cat" value="cat">
+                              <label for="cat">猫</label>
+                            </div>
                             <?php if($error['name'] == "blank"): ?>
                               <p class="text-danger">Nameを入力してください。</p>
                             <?php endif; ?>
@@ -99,7 +112,7 @@ if (!empty($_POST)) {
                             <?php endif; ?>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input type="text" name="password" id="password" class="form-control">
+                                <input type="password" name="password" id="password" class="form-control">
                             </div>
                             <?php if($error['password2'] == "blank"): ?>
                               <p class="text-danger">確認のためのパスワードを入力してください。</p>
@@ -108,7 +121,7 @@ if (!empty($_POST)) {
                             <?php endif; ?>
                             <div class="form-group">
                                 <label for="password2" class="text-info">Password 再入力:</label><br>
-                                <input type="text" name="password2" id="password2" class="form-control">
+                                <input type="password" name="password2" id="password2" class="form-control">
                             </div>
                             <div class="form-group submit">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="確認画面へ">
