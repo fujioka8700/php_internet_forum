@@ -59,7 +59,9 @@ unset($pdo);
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="./css/style.css">
     <title>犬・猫 どちら派掲示板</title>
     <style>
       .message img {
@@ -96,5 +98,6 @@ unset($pdo);
           <?php endif; ?>
         </div>
       <?php endforeach; ?>
+      <script src="./dist/app.js"></script>
   </body>
 </html>
