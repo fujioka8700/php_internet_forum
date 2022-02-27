@@ -7,7 +7,7 @@ mix.js('src/app.js', 'dist').setPublicPath('dist')
             target: "localhost",
         },
         files: [
-            "*.*",
+            "**/*.*",
         ],
         open: false,
         reloadOnRestart: true,
