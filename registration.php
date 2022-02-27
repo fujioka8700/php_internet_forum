@@ -38,6 +38,13 @@ if (!empty($_POST)) {
 
     $error['password'] = is_empty_member('password');
 
+    $error['password2'] = is_empty_member('password2');
+
+    // パスワードの確認
+    if (($_POST['password'] != $_POST['password2']) && ($_POST['password2'] != "")) {
+      $error['password2'] = 'difference';
+    }
+
     is_no_error($error);
 }
 
@@ -52,11 +59,15 @@ if (!empty($_POST)) {
   <body>
       <?php
       // デバッグ
-      // echo $error['email'];
+      // echo $error['password2'];
       ?>
       <h1>会員登録画面</h1>
       <p><a href="./index.php">TOPへ戻る</a></p>
       <form action="./registration.php" method="post">
+          <input type="radio" name="animal" id="dog" value="dog" checked>
+          <label for="dog">犬</label>
+          <input type="radio" name="animal" id="cat" value="cat">
+          <label for="cat">猫</label>
           <?php if($error['name'] == "blank"): ?>
             <p>名前を入力してください。</p>
           <?php endif; ?>
@@ -71,6 +82,12 @@ if (!empty($_POST)) {
             <p>パスワードを入力してください。</p>
           <?php endif; ?>
           <p>パスワード<input type="password" name="password" id=""></p>
+          <?php if($error['password2'] == "blank"): ?>
+            <p>確認のためのパスワードを入力してください。</p>
+          <?php elseif($error['password2'] == "difference"): ?>
+            <p>パスワードが上記と違います。</p>
+          <?php endif; ?>
+          <p>パスワード再入力<input type="password" name="password2" id=""></p>
           <input type="submit" value="登録">
       </form>
   </body>

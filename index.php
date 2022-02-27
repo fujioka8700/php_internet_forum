@@ -15,7 +15,7 @@ if (!empty($_POST)) {
         $statement->execute();
         $member = $statement->fetch(PDO::FETCH_ASSOC);
     
-        if ($_POST['password'] == $member['password']) {
+        if (password_verify($_POST['password'], $member['password'])) {
             $_SESSION['id'] = $member['id'];
             $_SESSION['time'] = time();
             header('Location: ./forum.php');

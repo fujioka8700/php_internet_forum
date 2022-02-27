@@ -16,9 +16,13 @@ if (!isset($_SESSION['join'])) {
   </head>
   <body>
       <?php
-      // デバッグ
+      // print_r($animal);
       ?>
       <h1>会員情報確認画面</h1>
+      <?php switch($animal):
+            case ('dog'): ?><p>私は犬派です。</p><?php break ; ?>
+      <?php case('cat'): ?><p>私は猫派です。</p><?php break; ?>
+      <?php endswitch; ?>
       <p>name: <?php echo $name; ?></p>
       <p>email: <?php echo $email; ?></p>
       <p>パスワード: [セキュリティのため非表示]</p>
