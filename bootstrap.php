@@ -14,12 +14,12 @@
     <div class="container">
       <div class="row">
         <div class="col col-md-8 offset-md-2">
-          <p class="h1 text-center my-3">犬・猫 どちら派掲示板</p>
+          <p class="h1 text-center my-3 text-white fs-2">犬・猫 どちら派掲示板</p>
           <button type="button" class="btn btn-secondary btn-sm mb-3">ログアウト</button>
 
           <!-- 本文、投稿部分 -->
           <div class="card mb-3">
-            <div class="card-body">
+            <div class="card-body post-text">
               <p>ねこ派 さん、ようこそ！</p>
               <p class="mb-2">コメントしてください</p>
               <div class="input-group">
@@ -29,7 +29,7 @@
                 <label for="formFile" class="form-label">可愛い犬や猫の写真があれば、アップしてください</label>
                 <input class="form-control" type="file" id="formFile">
               </div>
-              <button type="button" class="btn bg-info mt-3">投稿する</button>
+              <button type="button" class="btn btn-info mt-3">投稿する</button>
             </div>
           </div>
 
@@ -43,7 +43,7 @@
                 </div>
                 <div class="text-end">
                 19:31:11
-                <button type="button" class="btn-sm bg-secondary bg-gradient opacity-50">削除</button>
+                <button type="button" class="btn-sm btn-outline-secondary">削除</button>
                 </div>
               </div>
             </div>
