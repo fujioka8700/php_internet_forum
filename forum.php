@@ -63,22 +63,8 @@ unset($pdo);
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="./dist/app.css">
     <title>犬・猫 どちら派掲示板</title>
-    <style>
-      .message img {
-        width: 100px;
-      }
-    </style>
   </head>
   <body>
-      <?php
-      // デバッグ
-      // print_r($_SESSION);
-      // phpinfo();
-      ?>
-
-
-
-
       <div class="container">
         <div class="row">
           <div class="col col-md-8 offset-md-2">
