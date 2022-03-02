@@ -43,8 +43,31 @@ if (!empty($_POST['message'])) {
   }
 }
 
-// 全ての投稿内容を取得
-$posts = $pdo->query('SELECT m.animal, p.message, p.image, m.name, p.created, p.created_by, p.id FROM members AS m, posts AS p WHERE m.id = p.created_by ORDER BY p.created DESC');
+// 投稿数の合計
+function sumPosts($pdo) {
+  $sth = $pdo->query('select count(*) from posts');
+  $posts_count = $sth->fetch(PDO::FETCH_ASSOC);
+  return $posts_count['count(*)'];
+}
+
+// 現在のページ
+if (!isset($_GET['page'])) {
+  $page = 1;
+} else {
+  $page = $_GET['page'];
+}
+
+$max = 5; //コンテンツの表示数
+$contents_sum = sumPosts($pdo); //コンテンツの総数
+$max_page = ceil($contents_sum / $max); //ページの最大値
+$start = $max * ($page - 1); // スタートするページを取得
+
+// 投稿内容を取得
+$sth = $pdo->prepare('SELECT m.animal, p.message, p.image, m.name, p.created, p.created_by, p.id FROM members AS m, posts AS p WHERE m.id = p.created_by ORDER BY p.created DESC LIMIT :start, :max');
+$sth->bindParam(':start', $start, PDO::PARAM_INT);
+$sth->bindParam(':max', $max, PDO::PARAM_INT);
+$sth->execute();
+$posts = $sth->fetchAll();
 
 // CSRF対策
 $TOKEN_LENGTH = 16;
@@ -53,7 +76,6 @@ $token = bin2hex($tokenByte);
 $_SESSION['token'] = $token;
 
 unset($pdo);
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,7 +99,13 @@ unset($pdo);
             <!-- 本文、投稿部分 -->
             <div class="card mb-3">
               <div class="card-body post-text">
-                <p><?php echo $member['name']; ?> さん、ようこそ！</p>
+                <div class="memberAnimalFace text-center">
+                  <?php
+                    $anomaleface = $member['animal'] == 'cat' ? 'animalface_neko.png' : 'animalface_inu.png'
+                  ?>
+                  <img src="images_src/<?= $anomaleface ?>" class="img-fluid" alt="img-fluid" style="width: 50px;">
+                </div>
+                <p><?php echo $member['name']; ?> さん、ようこそ!!</p>
                 <p class="mb-2">コメントしてください</p>
                 <form action="./forum.php" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="token" value="<?=$token?>">
@@ -125,6 +153,32 @@ unset($pdo);
                 </div><!-- .card -->
               </div><!-- .message -->
             <?php endforeach; ?>
+            <!-- ページネーション -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pg">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination d-flex justify-content-center mb-0">
+                      <li class="page-item">
+                        <?php  if ($page > 1): ?>
+                          <a class="page-link" href="forum.php?page=<?php echo ($page-1); ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        <?php endif; ?>
+                      </li>
+                      <li class="page-item disabled"><a class="page-link"><?=$page?></a></li>
+                      <li class="page-item">
+                        <?php  if ($page < $max_page): ?>
+                          <a class="page-link" href="forum.php?page=<?php echo ($page+1); ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        <?php endif; ?>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
           </div><!-- .col -->
         </div><!-- .row -->
       </div><!-- .container -->
