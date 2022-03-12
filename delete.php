@@ -21,4 +21,4 @@ if (isset($_SESSION['id'])) {
         $del->execute();
     }
 }
-header('Location: ./forum.php');
+header('Location: ./index.php');
