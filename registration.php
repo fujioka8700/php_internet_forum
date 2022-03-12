@@ -127,7 +127,7 @@ if (!empty($_POST)) {
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="確認画面へ">
                             </div>
                             <div id="register-link" class="text-right">
-                                <span class="text-info"><a href="./index.php">TOPへ戻る</a></span>
+                                <span class="text-info"><a href="./login.php">ログイン画面へ戻る</a></span>
                             </div>
                         </form>
                     </div>

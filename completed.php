@@ -37,7 +37,7 @@ unset($_SESSION['join']);
                               <p class="text-center"><?php echo $member['name']; ?> さん</p>
                               <p class="text-center">無事に会員登録が完了しました。</p>
                             </div>
-                            <p class="text-right"><a href="./index.php">TOPへ戻る</a></p>
+                            <p class="text-right"><a href="./login.php">ログイン画面へ戻る</a></p>
                         </form>
                     </div>
                 </div>
