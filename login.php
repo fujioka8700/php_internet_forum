@@ -44,7 +44,7 @@ if (!empty($_POST)) {
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6 position-relative">
-                    <div class="position-absolute to-top">
+                    <div class="position-absolute to-top" style="top: 60px;">
                         <button type="button" class="btn btn-secondary"><a href="index.php" class="text-decoration-none text-white">TOPへ戻る</a></button>
                     </div>
                     <div id="login-box" class="col-md-12">
