@@ -32,6 +32,7 @@ https://www.dogcat.space
 
 # 要件定義
 頭の中のイメージをノートに書きます。
+
 これがないと、何を作ればいいか全くわかりません。重要です。
 
 ## 各々ページの設計図
@@ -48,6 +49,7 @@ https://www.dogcat.space
 
 ## ER図
 書き出したイメージの図から、どういったデータベースが必要か書き出します。
+
 投稿者と投稿記事のデータが保存できればいいので、以下のように作ります。
 
 <img width="400" alt="ER図" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/968572/629321bd-5663-caef-d1d4-7b7df617c5ea.jpeg">
@@ -64,7 +66,9 @@ https://www.dogcat.space
 
 ## AWSアーキテクチャ
 Route53とApplicationLoadBalancerで、独自ドメインとSSL/TLSに対応させました。
+
 投稿者と投稿記事のデータはRDSに保存しています。
+
 毎日1回バックアップを取るようにし、1週間前までデータを復元できるようにしています。
 
 <img width="500" alt="AWSアーキテクチャ" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/968572/52fd6013-7460-8866-2147-0becf2f3b36c.jpeg">
